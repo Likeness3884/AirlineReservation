@@ -1,2 +1,2 @@
 # AirlineReservation
-Another weird university home work project
+Another weird university project

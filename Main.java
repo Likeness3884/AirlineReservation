@@ -7,7 +7,7 @@ public class Main {
     private static int userCount = 1;
 
     // private static String[][] schedule = new String[20][7];
-    private static String[] scheduleParts = {"FlightId", "Origin", "Destination", "Date", "Time", "Price", "Seats"};
+    private static String[] parts = {"FlightId", "Origin", "Destination", "Date", "Time", "Price", "Seats"};
     private static String[] FlightIds = new String[20];
     private static String[] Origins = new String[20];
     private static String[] Destinations = new String[20];
@@ -32,29 +32,29 @@ public class Main {
         Seats[0] = 51;Seats[1] = 245;Seats[2] = 12;
         // ==================================================================================
 
-        while (true) {
-            System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n"
-                            +"           WELCOME TO AIRELINE RESERVATION SYSTEM             \n"
-                            +"::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n"
-                            +"..........................MENU OPTIONS........................\n"
-                            +"\n"
-                            +"    <1> Sign in\n"
-                            +"    <2> Sign up\n");
-            System.out.print("Enter your choose: ");
+        // while (true) {
+        //     System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n"
+        //                     +"           WELCOME TO AIRELINE RESERVATION SYSTEM             \n"
+        //                     +"::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n"
+        //                     +"..........................MENU OPTIONS........................\n"
+        //                     +"\n"
+        //                     +"    <1> Sign in\n"
+        //                     +"    <2> Sign up\n");
+        //     System.out.print("Enter your choose: ");
 
-            int choose = scanner.nextInt();
-            System.out.println();
+        //     int choose = scanner.nextInt();
+        //     System.out.println();
 
-            switch (choose) {
-                case 1:
-                    if (!DoSignIn()) continue;
-                    break;
-                case 2:
-                    if (!DoSignUp()) continue;
-                    break;
-            }
-            break;
-        }
+        //     switch (choose) {
+        //         case 1:
+        //             if (!DoSignIn()) continue;
+        //             break;
+        //         case 2:
+        //             if (!DoSignUp()) continue;
+        //             break;
+        //     }
+        //     break;
+        // }
         AdminMenu();
     }
 
@@ -150,19 +150,19 @@ public class Main {
             }
         }
 
-        System.out.print("Enter " + scheduleParts[0] + ": ");
+        System.out.print("Enter " + parts[0] + ": ");
         FlightIds[id] = scanner.next();
-        System.out.print("Enter " + scheduleParts[1] + ": ");
+        System.out.print("Enter " + parts[1] + ": ");
         Origins[id] = scanner.next();
-        System.out.print("Enter " + scheduleParts[2] + ": ");
+        System.out.print("Enter " + parts[2] + ": ");
         Destinations[id] = scanner.next();
-        System.out.print("Enter " + scheduleParts[3] + ": ");
+        System.out.print("Enter " + parts[3] + ": ");
         Dates[id] = scanner.next();
-        System.out.print("Enter " + scheduleParts[4] + ": ");
+        System.out.print("Enter " + parts[4] + ": ");
         Times[id] = scanner.next();
-        System.out.print("Enter " + scheduleParts[5] + ": ");
+        System.out.print("Enter " + parts[5] + ": ");
         Prices[id] = scanner.next();
-        System.out.print("Enter " + scheduleParts[6] + ": ");
+        System.out.print("Enter " + parts[6] + ": ");
         Seats[id] = scanner.nextInt();
 
         if (id == scheduleCount) {
@@ -184,17 +184,17 @@ public class Main {
         }
 
         if (id >= 0) {
-            System.out.print("Enter " + scheduleParts[1] + ": ");
+            System.out.print("Enter " + parts[1] + ": ");
             Origins[id] = scanner.next();
-            System.out.print("Enter " + scheduleParts[2] + ": ");
+            System.out.print("Enter " + parts[2] + ": ");
             Destinations[id] = scanner.next();
-            System.out.print("Enter " + scheduleParts[3] + ": ");
+            System.out.print("Enter " + parts[3] + ": ");
             Dates[id] = scanner.next();
-            System.out.print("Enter " + scheduleParts[4] + ": ");
+            System.out.print("Enter " + parts[4] + ": ");
             Times[id] = scanner.next();
-            System.out.print("Enter " + scheduleParts[5] + ": ");
+            System.out.print("Enter " + parts[5] + ": ");
             Prices[id] = scanner.next();
-            System.out.print("Enter " + scheduleParts[6] + ": ");
+            System.out.print("Enter " + parts[6] + ": ");
             Seats[id] = scanner.nextInt();
         }
     }
@@ -217,19 +217,11 @@ public class Main {
     }
 
     private static void FlightSchedules() {
-        System.out.print("""
-            |FlightId\t|Origin\t|Destination\t|Date\t|Time\t|Price\t|Seats\t|
-            ...................................................................................
-                """);
+        String format = "|%-11s|%-11s|%-13s|%-12s|%-11s|%-11s|%-6s|\n";
+        System.out.format(format, parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6]);
+        System.out.println("...................................................................................");
         for (int i = 0; i < scheduleCount; i++) {
-            System.out.print("|" + FlightIds[i] + "\t"
-                            +"|" + Origins[i] + "\t"
-                            +"|" + Destinations[i] + "\t"
-                            +"|" + Dates[i] + "\t"
-                            +"|" + Times[i] + "\t"
-                            +"|" + Prices[i] + "\t"
-                            +"|" + Seats[i] + "\t");
-            System.out.println("|");
+            System.out.format(format, FlightIds[i], Origins[i], Destinations[i], Dates[i], Times[i], Prices[i], Seats[i]);
             System.out.println("...................................................................................");
         }
     }

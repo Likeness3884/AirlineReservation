@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Main {
 	/* ================================================================ */
-    private static Scanner scanner = new Scanner(System.in);
+	private static Scanner scanner = new Scanner(System.in);
 
 	public static ArrayList<String> userNames = new ArrayList<String>();
 	public static ArrayList<String> userPasses = new ArrayList<String>();
@@ -17,7 +17,7 @@ public class Main {
 	public static ArrayList<Integer> Seats = new ArrayList<Integer>();
 	/* ================================================================ */
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 		Welcome welcome = new Welcome();
 		Admin admin = new Admin();
 		Passenger passenger = new Passenger();
@@ -53,34 +53,41 @@ public class Main {
 		Seats.add(51);
 		Seats.add(245);
 		Seats.add(12);
-        // ==================
+		// ==================
 
-        // while (true) {
-        //     System.out.println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n"
-        //                     +"           WELCOME TO AIRELINE RESERVATION SYSTEM             \n"
-        //                     +"::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n"
-        //                     +"..........................MENU OPTIONS........................\n"
-        //                     +"\n"
-        //                     +"    <1> Sign in\n"
-        //                     +"    <2> Sign up\n");
-        //     System.out.print("Enter your choose: ");
-
-        //     int choose = scanner.nextInt();
-        //     System.out.println();
-
-        //     switch (choose) {
-        //         case 1:
-        //             if (!DoSignIn()) continue;
-        //             break;
-        //         case 2:
-        //             if (!DoSignUp()) continue;
-        //             break;
-        //     }
-        //     break;
-        // }
-		admin.ShowMenu();
+		//admin.ShowMenu();
 		//welcome.ShowMenu();
 		//passenger.ShowMenu();
+
+		while (true) {
+			System.out.println(
+				  "\n"
+				+ ":::::::::::::::::::::::::::::::::::::::::::::::\n"
+				+ "    WELCOME TO AIRLINE RESERVATION SYSTEM      \n"
+				+ ":::::::::::::::::::::::::::::::::::::::::::::::\n"
+				+ " ................MENU OPTIONS................. \n"
+				+ "\n"
+				+ "    <1> Sign in\n"
+				+ "    <2> Sign up\n"
+			);
+
+			System.out.print("Enter your choose: ");
+			int choose = scanner.nextInt();
+			System.out.println();
+
+			switch (choose) {
+				case 1:
+					String user = welcome.signIn();
+					if (!user.equals("")) {
+						if (user.equals("Admin")) admin.ShowMenu();
+						else passenger.ShowMenu();
+					}
+					break;
+				case 2:
+					welcome.signUp();
+					break;
+			}
+		}
     }
 }
 
@@ -88,31 +95,33 @@ class Welcome {
 	private Scanner scanner = new Scanner(System.in);
 
 	public void ShowMenu() {
-		System.out.println(
-			  "\n"
-			+ ":::::::::::::::::::::::::::::::::::::::::::::::\n"
-			+ "    WELCOME TO AIRLINE RESERVATION SYSTEM      \n"
-			+ ":::::::::::::::::::::::::::::::::::::::::::::::\n"
-			+ " ................MENU OPTIONS................. \n"
-			+ "\n"
-			+ "    <1> Sign in\n"
-			+ "    <2> Sign up\n"
-		);
-		System.out.print("Enter your choose: ");
+		while (true) {
+			System.out.println(
+				  "\n"
+				+ ":::::::::::::::::::::::::::::::::::::::::::::::\n"
+				+ "    WELCOME TO AIRLINE RESERVATION SYSTEM      \n"
+				+ ":::::::::::::::::::::::::::::::::::::::::::::::\n"
+				+ " ................MENU OPTIONS................. \n"
+				+ "\n"
+				+ "    <1> Sign in\n"
+				+ "    <2> Sign up\n"
+			);
+			System.out.print("Enter your choose: ");
 
-		int choose = scanner.nextInt();
-		System.out.println();
-		switch (choose) {
-			case 1:
-				signIn();
-				break;
-			case 2:
-				signUp();
-				break;
+			int choose = scanner.nextInt();
+			System.out.println();
+			switch (choose) {
+				case 1:
+					signIn();
+					break;
+				case 2:
+					signUp();
+					break;
+			}
 		}
 	}
 
-	private boolean signIn() {
+	public String signIn() {
 		System.out.print("Username: ");
 		String userName = scanner.next();
 
@@ -125,34 +134,32 @@ class Welcome {
 			}
 			userIndex++;
 		}
-		if (!bExist) return false;
+		if (!bExist) return "";
 
 		System.out.print("Password: ");
 		String userPass = scanner.next();
 
 		if (userPass.contentEquals(Main.userPasses.get(userIndex)))
 		{
-			return true;
+			return userName;
 		}
-		return false;
+		return "";
 	}
 
-	private boolean signUp() {
+	public void signUp() {
 		System.out.print("New Username: ");
 		String userName = scanner.next();
 
 		for (String name : Main.userNames) {
 			if (userName.contentEquals(name)) {
-				return false;
-            }
-        }
-        Main.userNames.add(userName);
+				return;
+			}
+		}
+		Main.userNames.add(userName);
 
-        System.out.print("Password: ");
-        String userPass = scanner.next();
+		System.out.print("Password: ");
+		String userPass = scanner.next();
 
-        Main.userPasses.add(userPass);
-
-        return true;
-	};
+		Main.userPasses.add(userPass);
+	}
 }

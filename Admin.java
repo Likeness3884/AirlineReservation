@@ -1,9 +1,16 @@
 import java.util.Scanner;
 
 public class Admin {
+	String name;
+	String pass;
 	private Scanner scanner = new Scanner(System.in);
-    private static String[] parts = { "FlightId", "Origin", "Destination", 
+	private static String[] parts = { "FlightId", "Origin", "Destination", 
 									  "Date", "Time", "Price", "Seats" };
+
+	Admin(String name, String pass) {
+		this.name = name;
+		this.pass = pass;
+	}
 
 	public void ShowMenu() {
 		Boolean flag = true;

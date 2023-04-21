@@ -3,7 +3,8 @@ import java.util.ArrayList;
 
 public class Main {
 	/* ================================================================ */
-	private static Scanner scanner = new Scanner(System.in);
+	public static Admin admin = new Admin("Admin", "Admin");
+	public static ArrayList<Passenger> passengers = new ArrayList<Passenger>();
 
 	public static ArrayList<String> userNames = new ArrayList<String>();
 	public static ArrayList<String> userPasses = new ArrayList<String>();
@@ -15,49 +16,31 @@ public class Main {
 	public static ArrayList<String> Times = new ArrayList<String>();
 	public static ArrayList<String> Prices = new ArrayList<String>();
 	public static ArrayList<Integer> Seats = new ArrayList<Integer>();
+
+	private static Scanner scanner = new Scanner(System.in);
 	/* ================================================================ */
 
 	public static void main(String[] args) {
 		Welcome welcome = new Welcome();
-		Admin admin = new Admin();
-		Passenger passenger = new Passenger();
 
 		// set default values
 		userNames.add("Admin");
 		userPasses.add("Admin");
 
-		FlightIds.add("WX-12");
-		FlightIds.add("WX-15");
-		FlightIds.add("BG-22");
-		
-		Origins.add("Yazd");
-		Origins.add("Mashhad");
-		Origins.add("Shiraz");
-		
-		Destinations.add("Tehran");
-		Destinations.add("Ahvaz");
-		Destinations.add("Tabriz");
-		
-		Dates.add("1401-12-10");
-		Dates.add("1401-12-11");
-		Dates.add("1401-12-12");
-		
-		Times.add("12:30");
-		Times.add("08:00");
-		Times.add("22:30");
-		
-		Prices.add("700,000");
-		Prices.add("900,000");
-		Prices.add("1,100,000");
-		
-		Seats.add(51);
-		Seats.add(245);
-		Seats.add(12);
+		FlightIds.add("WX-12");FlightIds.add("WX-15");FlightIds.add("BG-22");
+		Origins.add("Yazd");Origins.add("Mashhad");Origins.add("Shiraz");
+		Destinations.add("Tehran");Destinations.add("Ahvaz");Destinations.add("Tabriz");
+		Dates.add("1401-12-10");Dates.add("1401-12-11");Dates.add("1401-12-12");
+		Times.add("12:30");Times.add("08:00");Times.add("22:30");
+		Prices.add("700,000");Prices.add("900,000");Prices.add("1,100,000");
+		Seats.add(51);Seats.add(245);Seats.add(12);
 		// ==================
 
 		//admin.ShowMenu();
 		//welcome.ShowMenu();
 		//passenger.ShowMenu();
+		Passenger passenger = new Passenger("qw", "12");
+		passengers.add(passenger);
 
 		while (true) {
 			System.out.println(
@@ -77,10 +60,10 @@ public class Main {
 
 			switch (choose) {
 				case 1:
-					String user = welcome.signIn();
-					if (!user.equals("")) {
-						if (user.equals("Admin")) admin.ShowMenu();
-						else passenger.ShowMenu();
+					int index = welcome.signIn();
+					if (index >= -1) {
+						if (index == -1) admin.ShowMenu();
+						else passengers.get(index).ShowMenu();
 					}
 					break;
 				case 2:
@@ -121,29 +104,42 @@ class Welcome {
 		}
 	}
 
-	public String signIn() {
+	public int signIn() {
 		System.out.print("Username: ");
 		String userName = scanner.next();
 
+		Boolean bFind = false;
+
+		Boolean bAdmin = false;
+		if (userName.equals(Main.admin.name)) {
+			bAdmin = true;
+			bFind = true;
+		}
+
 		int userIndex = 0;
-		Boolean bExist = false;
-		for (String name : Main.userNames) {
-			if (userName.contentEquals(name)) {
-				bExist = true;
+		for (Passenger passenger : Main.passengers) {
+			if (userName.equals(passenger.name)) {
+				bFind = true;
 				break;
 			}
 			userIndex++;
 		}
-		if (!bExist) return "";
+
+		if (!bFind) return -2;
 
 		System.out.print("Password: ");
 		String userPass = scanner.next();
 
-		if (userPass.contentEquals(Main.userPasses.get(userIndex)))
-		{
-			return userName;
+		if (bAdmin) {
+			if (userPass.equals(Main.admin.pass)) return -1;
 		}
-		return "";
+		else if (bFind)
+		{
+			if (userPass.equals(Main.passengers.get(userIndex).pass)) {
+				return userIndex;
+			}
+		}
+		return -2;
 	}
 
 	public void signUp() {
@@ -161,5 +157,7 @@ class Welcome {
 		String userPass = scanner.next();
 
 		Main.userPasses.add(userPass);
+		Passenger passenger = new Passenger(userName, userPass);
+		Main.passengers.add(passenger);
 	}
 }

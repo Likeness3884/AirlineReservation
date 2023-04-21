@@ -2,6 +2,13 @@ import java.util.Scanner;
 
 public class Passenger {
 	private Scanner scanner = new Scanner(System.in);
+	String name;
+	String pass;
+
+	Passenger(String name, String pass) {
+		this.name = name;
+		this.pass = pass;
+	}
 
 	public void ShowMenu() {
 		Boolean flag = true;

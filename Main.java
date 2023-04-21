@@ -1,38 +1,77 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
-    private static String[] userNames = new String[10];
-    private static String[] userPasses = new String[10];
     private static int userCount = 1;
 
     // private static String[][] schedule = new String[20][7];
     private static String[] parts = {"FlightId", "Origin", "Destination", "Date", "Time", "Price", "Seats"};
-    private static String[] FlightIds = new String[20];
-    private static String[] Origins = new String[20];
-    private static String[] Destinations = new String[20];
-    private static String[] Dates = new String[20];
-    private static String[] Times = new String[20];
-    private static String[] Prices = new String[20];
-    private static int[] Seats = new int[20];
-    private static int scheduleCount = 3;
+    //private static String[] FlightIds = new String[20];
+    //private static String[] Origins = new String[20];
+    //private static String[] Destinations = new String[20];
+    //private static String[] Dates = new String[20];
+    //private static String[] Times = new String[20];
+    //private static String[] Prices = new String[20];
+    //private static int[] Seats = new int[20];
+	private static int scheduleCount = 3;
 
+	public static ArrayList<String> userNames = new ArrayList<String>();
+	public static ArrayList<String> userPasses = new ArrayList<String>();
+
+	public static ArrayList<String> FlightIds = new ArrayList<String>();
+	public static ArrayList<String> Origins= new ArrayList<String>();
+	public static ArrayList<String> Destinations = new ArrayList<String>();
+	public static ArrayList<String> Dates = new ArrayList<String>();
+	public static ArrayList<String> Times = new ArrayList<String>();
+	public static ArrayList<String> Prices = new ArrayList<String>();
+	public static ArrayList<Integer> Seats = new ArrayList<Integer>();
 
     public static void main(String[] args) {
-		Admin admin = new Admin();
 		Welcome welcome = new Welcome();
+		Admin admin = new Admin();
 		Passenger passenger = new Passenger();
+		userNames.add("Admin");
+		userPasses.add("Admin");
+
+		FlightIds.add("WX-12");
+		FlightIds.add("WX-15");
+		FlightIds.add("BG-22");
+		
+		Origins.add("Yazd");
+		Origins.add("Mashhad");
+		Origins.add("Shiraz");
+		
+		Destinations.add("Tehran");
+		Destinations.add("Ahvaz");
+		Destinations.add("Tabriz");
+		
+		Dates.add("1401-12-10");
+		Dates.add("1401-12-11");
+		Dates.add("1401-12-12");
+		
+		Times.add("12:30");
+		Times.add("08:00");
+		Times.add("22:30");
+		
+		Prices.add("700,000");
+		Prices.add("900,000");
+		Prices.add("1,100,000");
+		
+		Seats.add(51);
+		Seats.add(245);
+		Seats.add(12);
         // Default User
-        userNames[0] = "Admin";
-        userPasses[0] = "Admin";
+        //userNames[0] = "Admin";
+        //userPasses[0] = "Admin";
         // Default Schedules
-        FlightIds[0] = "WX-12";FlightIds[1] = "WX-15";FlightIds[2] = "BG-22";
-        Origins[0] = "Yazd";Origins[1] = "Mashhad";Origins[2] = "Shiraz";
-        Destinations[0] = "Tehran";Destinations[1] = "Ahvaz";Destinations[2] = "Tabriz";
-        Dates[0] = "1401-12-10";Dates[1] = "1401-12-11";Dates[2] = "1401-12-12";
-        Times[0] = "12:30";Times[1] = "08:00";Times[2] = "22:30";
-        Prices[0] = "700,000";Prices[1] = "900,000";Prices[2] = "1,100,000";
-        Seats[0] = 51;Seats[1] = 245;Seats[2] = 12;
+        //FlightIds[0] = "WX-12";FlightIds[1] = "WX-15";FlightIds[2] = "BG-22";
+        //Origins[0] = "Yazd";Origins[1] = "Mashhad";Origins[2] = "Shiraz";
+        //Destinations[0] = "Tehran";Destinations[1] = "Ahvaz";Destinations[2] = "Tabriz";
+        //Dates[0] = "1401-12-10";Dates[1] = "1401-12-11";Dates[2] = "1401-12-12";
+        //Times[0] = "12:30";Times[1] = "08:00";Times[2] = "22:30";
+        //Prices[0] = "700,000";Prices[1] = "900,000";Prices[2] = "1,100,000";
+        //Seats[0] = 51;Seats[1] = 245;Seats[2] = 12;
         // ==================================================================================
 
         // while (true) {
@@ -60,11 +99,10 @@ public class Main {
         // }
         //AdminMenu();
 		//admin.ShowMenu();
-		//ShowMenu();
-		//welcome.ShowMenu();
-		passenger.ShowMenu();
+		welcome.ShowMenu();
+		//passenger.ShowMenu();
     }
-
+/*
     private static boolean DoSignIn() {
         System.out.print("Username: ");
         String userName = scanner.next();
@@ -232,8 +270,8 @@ public class Main {
             System.out.println("...................................................................................");
         }
     }
+*/
 }
-
 class Welcome {
 	private Scanner scanner = new Scanner(System.in);
 
@@ -263,6 +301,30 @@ class Welcome {
 		}
 	}
 
-	private void signIn() {};
+	private boolean signIn() {
+		System.out.print("Username: ");
+		String userName = scanner.next();
+
+		int userIndex = 0;
+		Boolean bExist = false;
+		for (String name : Main.userNames) {
+			if (userName.contentEquals(name)) {
+				bExist = true;
+				break;
+			}
+			userIndex++;
+		}
+		if (!bExist) return false;
+
+		System.out.print("Password: ");
+		String userPass = scanner.next();
+
+		if (userPass.contentEquals(Main.userPasses.get(userIndex)))
+		{
+			return true;
+		}
+		return false;
+	}
+
 	private void signUp() {};
 }

@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Admin {
 	private Scanner scanner = new Scanner(System.in);
+    private static String[] parts = { "FlightId", "Origin", "Destination", 
+									  "Date", "Time", "Price", "Seats" };
 
 	public void ShowMenu() {
 		System.out.println(
@@ -39,8 +41,88 @@ public class Admin {
 		}
 	}
 
-	private void Add() {};
-	private void Update() {};
-	private void Remove() {};
-	private void FlightSchedules() {};
+	private void Add() {
+		System.out.print("Enter " + parts[0] + ": ");
+		Main.FlightIds.add(scanner.next());
+		System.out.print("Enter " + parts[1] + ": ");
+		Main.Origins.add(scanner.next());
+		System.out.print("Enter " + parts[2] + ": ");
+		Main.Destinations.add(scanner.next());
+		System.out.print("Enter " + parts[3] + ": ");
+		Main.Dates.add(scanner.next());
+		System.out.print("Enter " + parts[4] + ": ");
+		Main.Times.add(scanner.next());
+		System.out.print("Enter " + parts[5] + ": ");
+		Main.Prices.add(scanner.next());
+		System.out.print("Enter " + parts[6] + ": ");
+		Main.Seats.add(scanner.nextInt());
+	};
+
+	private void Update() {
+        System.out.print("Enter FlightId: ");
+        String userInput = scanner.next();
+
+        int id = -1, i = 0;
+        for (String flightId : Main.FlightIds) {
+            if (userInput.contentEquals(flightId)) {
+                id = i;
+                break;
+            }
+			i++;
+        }
+
+        if (id >= 0) {
+            System.out.print("Enter " + parts[1] + ": ");
+            Main.Origins.set(id, scanner.next());
+            System.out.print("Enter " + parts[2] + ": ");
+            Main.Destinations.set(id, scanner.next());
+            System.out.print("Enter " + parts[3] + ": ");
+            Main.Dates.set(id, scanner.next());
+            System.out.print("Enter " + parts[4] + ": ");
+            Main.Times.set(id, scanner.next());
+            System.out.print("Enter " + parts[5] + ": ");
+            Main.Prices.set(id, scanner.next());
+            System.out.print("Enter " + parts[6] + ": ");
+            Main.Seats.set(id, scanner.nextInt());
+        }
+	}
+	private void Remove() {
+        System.out.print("Enter FlightId: ");
+        String userInput = scanner.next();
+
+        int id = -1, i = 0;
+        for (String flightId : Main.FlightIds) {
+            if (userInput.contentEquals(flightId)) {
+                id = i;
+                break;
+            }
+			i++;
+        }
+
+		if (id >= 0) {
+			Main.FlightIds.remove(id);
+			Main.Origins.remove(id);
+			Main.Destinations.remove(id);
+			Main.Dates.remove(id);
+			Main.Times.remove(id);
+			Main.Prices.remove(id);
+			Main.Seats.remove(id);
+        }
+	}
+
+	private void FlightSchedules() {
+        String format = "|%-11s|%-11s|%-13s|%-12s|%-11s|%-11s|%-6s|\n";
+        System.out.format(format, parts[0], parts[1], parts[2], parts[3], 
+								parts[4], parts[5], parts[6]);
+        System.out.println("......................................"
+							+ ".............................................");
+        for (int i = 0; i < Main.FlightIds.size(); i++) {
+            System.out.format(format, Main.FlightIds.get(i), Main.Origins.get(i), 
+								Main.Destinations.get(i), Main.Dates.get(i), 
+								Main.Times.get(i), Main.Prices.get(i), Main.Seats.get(i)
+			);
+            System.out.println("............................................"
+							+ ".......................................");
+        }
+	}
 }

@@ -6,7 +6,6 @@ public class Main {
     private static int userCount = 1;
 
     // private static String[][] schedule = new String[20][7];
-    private static String[] parts = {"FlightId", "Origin", "Destination", "Date", "Time", "Price", "Seats"};
     //private static String[] FlightIds = new String[20];
     //private static String[] Origins = new String[20];
     //private static String[] Destinations = new String[20];
@@ -14,7 +13,6 @@ public class Main {
     //private static String[] Times = new String[20];
     //private static String[] Prices = new String[20];
     //private static int[] Seats = new int[20];
-	private static int scheduleCount = 3;
 
 	public static ArrayList<String> userNames = new ArrayList<String>();
 	public static ArrayList<String> userPasses = new ArrayList<String>();
@@ -100,8 +98,8 @@ public class Main {
         //     break;
         // }
         //AdminMenu();
-		//admin.ShowMenu();
-		welcome.ShowMenu();
+		admin.ShowMenu();
+		//welcome.ShowMenu();
 		//passenger.ShowMenu();
     }
 /*

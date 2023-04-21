@@ -21,6 +21,7 @@ public class Main {
     public static void main(String[] args) {
 		Admin admin = new Admin();
 		Welcome welcome = new Welcome();
+		Passenger passenger = new Passenger();
         // Default User
         userNames[0] = "Admin";
         userPasses[0] = "Admin";
@@ -60,7 +61,8 @@ public class Main {
         //AdminMenu();
 		//admin.ShowMenu();
 		//ShowMenu();
-		welcome.ShowMenu();
+		//welcome.ShowMenu();
+		passenger.ShowMenu();
     }
 
     private static boolean DoSignIn() {

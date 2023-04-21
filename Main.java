@@ -19,6 +19,8 @@ public class Main {
 
 
     public static void main(String[] args) {
+		Admin admin = new Admin();
+		Welcome welcome = new Welcome();
         // Default User
         userNames[0] = "Admin";
         userPasses[0] = "Admin";
@@ -56,6 +58,9 @@ public class Main {
         //     break;
         // }
         //AdminMenu();
+		//admin.ShowMenu();
+		//ShowMenu();
+		welcome.ShowMenu();
     }
 
     private static boolean DoSignIn() {
@@ -225,4 +230,37 @@ public class Main {
             System.out.println("...................................................................................");
         }
     }
+}
+
+class Welcome {
+	private Scanner scanner = new Scanner(System.in);
+
+	public void ShowMenu() {
+		System.out.println(
+			  "\n"
+			+ ":::::::::::::::::::::::::::::::::::::::::::::::\n"
+			+ "    WELCOME TO AIRLINE RESERVATION SYSTEM      \n"
+			+ ":::::::::::::::::::::::::::::::::::::::::::::::\n"
+			+ " ................MENU OPTIONS................. \n"
+			+ "\n"
+			+ "    <1> Sign in\n"
+			+ "    <2> Sign up\n"
+			+ "\n"
+		);
+		System.out.print("Enter your choose: ");
+
+		int choose = scanner.nextInt();
+		System.out.println();
+		switch (choose) {
+			case 1:
+				signIn();
+				break;
+			case 2:
+				signUp();
+				break;
+		}
+	}
+
+	private void signIn() {};
+	private void signUp() {};
 }

@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import javax.swing.JFrame;
-import javax.swing.JButton;
 
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
@@ -58,17 +56,6 @@ public class Main {
         //     break;
         // }
         //AdminMenu();
-	JFrame frame = new JFrame("AirlineReservation");
-	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	frame.setSize(420, 420);
-	frame.setLayout(null);
-	frame.setVisible(true);
-	JButton buttonSignIn = new JButton("Sign In");
-	JButton buttonSignUp = new JButton("Sign Up");
-	buttonSignIn.setBounds(170, 160, 80, 40);
-	buttonSignUp.setBounds(170, 220, 80, 40);
-	frame.add(buttonSignIn);
-	frame.add(buttonSignUp);
     }
 
     private static boolean DoSignIn() {

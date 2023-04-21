@@ -31,6 +31,8 @@ public class Main {
 		Welcome welcome = new Welcome();
 		Admin admin = new Admin();
 		Passenger passenger = new Passenger();
+
+		// set default values
 		userNames.add("Admin");
 		userPasses.add("Admin");
 
@@ -285,7 +287,6 @@ class Welcome {
 			+ "\n"
 			+ "    <1> Sign in\n"
 			+ "    <2> Sign up\n"
-			+ "\n"
 		);
 		System.out.print("Enter your choose: ");
 
@@ -326,5 +327,22 @@ class Welcome {
 		return false;
 	}
 
-	private void signUp() {};
+	private boolean signUp() {
+		System.out.print("New Username: ");
+		String userName = scanner.next();
+
+		for (String name : Main.userNames) {
+			if (userName.contentEquals(name)) {
+				return false;
+            }
+        }
+        Main.userNames.add(userName);
+
+        System.out.print("Password: ");
+        String userPass = scanner.next();
+
+        Main.userPasses.add(userPass);
+
+        return true;
+	};
 }

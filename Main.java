@@ -14,7 +14,7 @@ public class Main {
 	public static ArrayList<String> Destinations = new ArrayList<String>();
 	public static ArrayList<String> Dates = new ArrayList<String>();
 	public static ArrayList<String> Times = new ArrayList<String>();
-	public static ArrayList<String> Prices = new ArrayList<String>();
+	public static ArrayList<Integer> Prices = new ArrayList<Integer>();
 	public static ArrayList<Integer> Seats = new ArrayList<Integer>();
 
 	private static Scanner scanner = new Scanner(System.in);
@@ -32,7 +32,7 @@ public class Main {
 		Destinations.add("Tehran");Destinations.add("Ahvaz");Destinations.add("Tabriz");
 		Dates.add("1401-12-10");Dates.add("1401-12-11");Dates.add("1401-12-12");
 		Times.add("12:30");Times.add("08:00");Times.add("22:30");
-		Prices.add("700,000");Prices.add("900,000");Prices.add("1,100,000");
+		Prices.add(700);Prices.add(900);Prices.add(1100);
 		Seats.add(51);Seats.add(245);Seats.add(12);
 		// ==================
 

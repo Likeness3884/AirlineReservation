@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 public class Admin {
-	String name;
-	String pass;
 	private Scanner scanner = new Scanner(System.in);
 	private static String[] parts = { "FlightId", "Origin", "Destination", 
 									  "Date", "Time", "Price", "Seats" };
+	String name;
+	String pass;
 
 	Admin(String name, String pass) {
 		this.name = name;
@@ -64,7 +64,7 @@ public class Admin {
 		System.out.print("Enter " + parts[4] + ": ");
 		Main.Times.add(scanner.next());
 		System.out.print("Enter " + parts[5] + ": ");
-		Main.Prices.add(scanner.next());
+		Main.Prices.add(scanner.nextInt());
 		System.out.print("Enter " + parts[6] + ": ");
 		Main.Seats.add(scanner.nextInt());
 	};
@@ -92,7 +92,7 @@ public class Admin {
             System.out.print("Enter " + parts[4] + ": ");
             Main.Times.set(id, scanner.next());
             System.out.print("Enter " + parts[5] + ": ");
-            Main.Prices.set(id, scanner.next());
+            Main.Prices.set(id, scanner.nextInt());
             System.out.print("Enter " + parts[6] + ": ");
             Main.Seats.set(id, scanner.nextInt());
         }
@@ -122,17 +122,17 @@ public class Admin {
 	}
 
 	private void FlightSchedules() {
-        String format = "|%-11s|%-11s|%-13s|%-12s|%-11s|%-11s|%-6s|\n";
-        System.out.format(format, parts[0], parts[1], parts[2], parts[3], 
+		String format = "|%-11s|%-11s|%-13s|%-12s|%-11s|%-11s|%-6s|\n";
+		System.out.format(format, parts[0], parts[1], parts[2], parts[3], 
 								parts[4], parts[5], parts[6]);
-        System.out.println("......................................"
+		System.out.println("......................................"
 							+ ".............................................");
-        for (int i = 0; i < Main.FlightIds.size(); i++) {
-            System.out.format(format, Main.FlightIds.get(i), Main.Origins.get(i), 
+		for (int i = 0; i < Main.FlightIds.size(); i++) {
+			System.out.format(format, Main.FlightIds.get(i), Main.Origins.get(i), 
 								Main.Destinations.get(i), Main.Dates.get(i), 
 								Main.Times.get(i), Main.Prices.get(i), Main.Seats.get(i)
 			);
-            System.out.println("............................................"
+			System.out.println("............................................"
 							+ ".......................................");
         }
 	}

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Main {
 	/* ================================================================ */
-	public static Admin admin = new Admin("Admin", "Admin");
+	//public static Admin admin = new Admin("Admin", "Admin");
 	public static ArrayList<Passenger> passengers = new ArrayList<Passenger>();
 
 	public static ArrayList<String> userNames = new ArrayList<String>();
@@ -21,7 +21,8 @@ public class Main {
 	/* ================================================================ */
 
 	public static void main(String[] args) {
-		Welcome welcome = new Welcome();
+		//Welcome welcome = new Welcome();
+		Home home = new Home();
 
 		// set default values
 		userNames.add("Admin");
@@ -36,12 +37,10 @@ public class Main {
 		Seats.add(51);Seats.add(245);Seats.add(12);
 		// ==================
 
-		//admin.ShowMenu();
-		//welcome.ShowMenu();
-		//passenger.ShowMenu();
-		Passenger passenger = new Passenger("qw", "12");
-		passengers.add(passenger);
+		//Passenger passenger = new Passenger("qw", "12");
+		//passengers.add(passenger);
 
+		/*
 		while (true) {
 			System.out.println(
 				  "\n"
@@ -71,9 +70,12 @@ public class Main {
 					break;
 			}
 		}
-    }
+		*/
+		home.ShowMenu();
+	}
 }
 
+/*
 class Welcome {
 	private Scanner scanner = new Scanner(System.in);
 
@@ -161,3 +163,4 @@ class Welcome {
 		Main.passengers.add(passenger);
 	}
 }
+*/

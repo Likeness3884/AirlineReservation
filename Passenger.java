@@ -6,6 +6,7 @@ public class Passenger {
 	String name;
 	String pass;
 	int charge;
+	Schedule schedule = new Schedule();
 	ArrayList<String> tickets = new ArrayList<String>();
 	ArrayList<Integer> ticketIds = new ArrayList<Integer>();
 	private Scanner scanner = new Scanner(System.in);
@@ -121,22 +122,13 @@ public class Passenger {
 		}
 	}
 
-	private void BookedTickets() {
-		String format = "|%-11s|%-11s|%-13s|%-12s|%-11s|%-11s|%-6s|\n";
-		System.out.format(format, parts[0], parts[1], parts[2], parts[3], 
-								parts[4], parts[5], parts[6]);
-		System.out.println("......................................"
-							+ ".............................................");
-		for (int i = 0; i < tickets.size(); i++) {
-			int index = Main.FlightIds.indexOf(tickets.get(i));
-			System.out.format(format, Main.FlightIds.get(index), Main.Origins.get(index), 
-								Main.Destinations.get(index), Main.Dates.get(index), 
-								Main.Times.get(index), Main.Prices.get(index), 
-								Main.Seats.get(index)
-			);
-			System.out.println("............................................"
-							+ ".......................................");
-        }
+	private void BookedTickets()
+	{
+		for (int i = 0, i < tickets.size(), i++)
+		{
+			System.out.println("| " + tickets.get(i) + " | "
+					+ ticketIds.get(i) + " |");
+		}
 	}
 
 	private void AddCharge() {

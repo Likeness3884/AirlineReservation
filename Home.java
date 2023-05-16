@@ -1,95 +1,108 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Home {
-	private Scanner scanner = new Scanner(System.in);
-	Admin admin = new Admin("Admin", "Admin");
+    private Scanner scanner = new Scanner(System.in);
+    private Schedule schedule = new Schedule();
+    private Admin admin = new Admin("Admin", "Admin", schedule);
+    private ArrayList<Passenger> passengers = new ArrayList<>();
 
-	public void ShowMenu() {
-		while (true) {
-			System.out.println(
-				  "\n"
-				+ ":::::::::::::::::::::::::::::::::::::::::::::::\n"
-				+ "    WELCOME TO AIRLINE RESERVATION SYSTEM      \n"
-				+ ":::::::::::::::::::::::::::::::::::::::::::::::\n"
-				+ " ................MENU OPTIONS................. \n"
-				+ "\n"
-				+ "    <1> Sign in\n"
-				+ "    <2> Sign up\n"
-			);
+    public Schedule getSchedule()
+    {
+        return schedule;
+    }
 
-			System.out.print("Enter your choose: ");
-			int choose = scanner.nextInt();
-			System.out.println();
+    public void setSchedule(Schedule schedule)
+    {
+        this.schedule = schedule;
+    }
 
-			switch (choose) {
-				case 1:
-					int index = signIn();
-					if (index >= -1) {
-						if (index == -1) admin.ShowMenu();
-						else Main.passengers.get(index).ShowMenu();
-					}
-					break;
-				case 2:
-					signUp();
-					break;
-			}
-		}
-	}
+    public void ShowMenu() {
+        while (true) {
+            System.out.println(
+                  "\n"
+                + ":::::::::::::::::::::::::::::::::::::::::::::::\n"
+                + "    WELCOME TO AIRLINE RESERVATION SYSTEM      \n"
+                + ":::::::::::::::::::::::::::::::::::::::::::::::\n"
+                + " ................MENU OPTIONS................. \n"
+                + "\n"
+                + "    <1> Sign in\n"
+                + "    <2> Sign up\n"
+            );
 
-	private int signIn() {
-		System.out.print("Username: ");
-		String userName = scanner.next();
+            System.out.print("Enter your choose: ");
+            int choose = scanner.nextInt();
+            System.out.println();
 
-		Boolean bFind = false;
+            switch (choose) {
+                case 1:
+                    int index = signIn();
+                    if (index >= -1) {
+                        if (index == -1) admin.ShowMenu(schedule);
+                        else passengers.get(index).ShowMenu();
+                    }
+                    break;
+                case 2:
+                    signUp();
+                    break;
+            }
+        }
+    }
 
-		Boolean bAdmin = false;
-		if (userName.equals(admin.name)) {
-			bAdmin = true;
-			bFind = true;
-		}
+    private int signIn() {
+        System.out.print("Enter Username: ");
+        String inName = scanner.next();
 
-		int userIndex = 0;
-		for (Passenger passenger : Main.passengers) {
-			if (userName.equals(passenger.name)) {
-				bFind = true;
-				break;
-			}
-			userIndex++;
-		}
+        Boolean bFind = false;
 
-		if (!bFind) return -2;
+        Boolean bAdmin = false;
+        if (inName.equals(admin.getName())) {
+            bFind = true;
+            bAdmin = true;
+        }
 
-		System.out.print("Password: ");
-		String userPass = scanner.next();
+        int index = 0;
+        for (Passenger passenger : passengers) {
+            if (inName.equals(passenger.getName())) {
+                bFind = true;
+                break;
+            }
+            index++;
+        }
 
-		if (bAdmin) {
-			if (userPass.equals(admin.pass)) return -1;
-		}
-		else if (bFind)
-		{
-			if (userPass.equals(Main.passengers.get(userIndex).pass)) {
-				return userIndex;
-			}
-		}
-		return -2;
-	}
+        if (!bFind) return -2;
 
-	private void signUp() {
-		System.out.print("New Username: ");
-		String userName = scanner.next();
+        System.out.print("Enter Password: ");
+        String inPass = scanner.next();
 
-		for (String name : Main.userNames) {
-			if (userName.contentEquals(name)) {
-				return;
-			}
-		}
-		Main.userNames.add(userName);
+        if (bAdmin) {
+            if (inPass.equals(admin.getPass())) return -1;
+        }
+        else if (bFind)
+        {
+            if (inPass.equals(passengers.get(index).getPass())) {
+                return index;
+            }
+        }
 
-		System.out.print("Password: ");
-		String userPass = scanner.next();
+        return -2;
+    }
 
-		Main.userPasses.add(userPass);
-		Passenger passenger = new Passenger(userName, userPass);
-		Main.passengers.add(passenger);
-	}
+    private void signUp() {
+        System.out.print("Enter Username: ");
+        String inName = scanner.next();
+
+        if (inName.equals(admin.getName())) return;
+        for (Passenger passenger : passengers) {
+            if (inName.contentEquals(passenger.getName())) {
+                return;
+            }
+        }
+
+        System.out.print("Enter Password: ");
+        String inPass = scanner.next();
+
+        Passenger passenger = new Passenger(inName, inPass);
+        passengers.add(passenger);
+    }
 }

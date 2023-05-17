@@ -1,139 +1,175 @@
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Passenger {
-	String name;
-	String pass;
-	int charge;
-	Schedule schedule = new Schedule();
-	ArrayList<String> tickets = new ArrayList<String>();
-	ArrayList<Integer> ticketIds = new ArrayList<Integer>();
-	private Scanner scanner = new Scanner(System.in);
-	Random rand = new Random();
-		String[] parts = { "FlightId", "Origin", "Destination", 
-									  "Date", "Time", "Price", "Seats" };
+    private String name;
+    private String pass;
+    private int charge;
+    private ArrayList<String> tickets = new ArrayList<String>();
+    private ArrayList<Integer> ticketIds = new ArrayList<Integer>();
+    private String[] parts = { "FlightId", "Origin", "Destination",
+                        "Date", "Time", "Price", "Seats" };
+    private Random rand = new Random();
 
-	Passenger(String name, String pass) {
-		this.name = name;
-		this.pass = pass;
-		this.charge = 0;
-	}
+    public Passenger(String name, String pass) {
+        this.name = name;
+        this.pass = pass;
+        this.charge = 0;
+    }
 
-	public void ShowMenu() {
-		Boolean flag = true;
-		while (flag) {
-			System.out.println(
-				  "\n"
-				+ "::::::::::::::::::::::::::::::\n"
-				+ "    PASSENGER MENU OPTIONS    \n"
-				+ "::::::::::::::::::::::::::::::\n"
-				+ " ............................ \n"
-				+ "\n"
-				+ "    <1> Change password\n"
-				+ "    <2> Search flight tickets\n"
-				+ "    <3> Booking ticket\n"
-				+ "    <4> Ticket cancellation\n"
-				+ "    <5> Booked tickets\n"
-				+ "    <6> Add charge\n"
-				+ "    <0> Sign out\n"
-			);
+    public String getName()
+    {
+        return name;
+    }
 
-			System.out.print("Enter your choose: ");
-			int choose = scanner.nextInt();
-			System.out.println();
+    public void setName(String name)
+    {
+        this.name = name;
+    }
 
-			switch (choose) {
-				case 1:
-					ChangePassword();
-					break;
-				case 2:
-					SearchFlightTickets();
-					break;
-				case 3:
-					BookingTicket();
-					break;
-				case 4:
-					TicketCancellation();
-					break;
-				case 5:
-					BookedTickets();
-					break;
-				case 6:
-					AddCharge();
-					break;
-				case 0:
-					flag = false;
-					break;
-			}
-		}
-	}
+    public void ShowMenu(Schedule schedule, Scanner scanner) {
+        Boolean flag = true;
+        while (flag) {
+            System.out.println(
+                  "\n"
+                + "::::::::::::::::::::::::::::::\n"
+                + "    PASSENGER MENU OPTIONS    \n"
+                + "::::::::::::::::::::::::::::::\n"
+                + " ............................ \n"
+                + "\n"
+                + "    <1> Change password\n"
+                + "    <2> Search flight tickets\n"
+                + "    <3> Booking ticket\n"
+                + "    <4> Ticket cancellation\n"
+                + "    <5> Booked tickets\n"
+                + "    <6> Add charge\n"
+                + "    <0> Sign out\n"
+            );
 
-	private void ChangePassword() {
-		System.out.print("Enter new password: ");
-		pass = scanner.next();
-		System.out.println();
-	}
+            System.out.print("Enter number: ");
+            int choose = scanner.nextInt();
+            System.out.println();
 
-	private void SearchFlightTickets() {
-		System.out.print("Enter flight id: ");
-		String id = scanner.next();
-		System.out.println();
+            switch (choose) {
+                case 1:
+                    changePassword();
+                    break;
+                case 2:
+                    searchFlightTickets();
+                    break;
+                case 3:
+                    bookingTicket();
+                    break;
+                case 4:
+                    ticketCancellation();
+                    break;
+                case 5:
+                    bookedTickets();
+                    break;
+                case 6:
+                    addCharge();
+                    break;
+                case 0:
+                    flag = false;
+                    break;
+            }
+        }
+    }
 
-		int i = Main.FlightIds.indexOf(id);
-		if (i >= 0) {
-			String format = "|%-11s|%-11s|%-13s|%-12s|%-11s|%-11s|%-6s|\n";
-			System.out.format(format, parts[0], parts[1], parts[2], parts[3], 
-								parts[4], parts[5], parts[6]);
-			System.out.println("......................................"
-							+ ".............................................");
-			System.out.format(format, Main.FlightIds.get(i), Main.Origins.get(i), 
-								Main.Destinations.get(i), Main.Dates.get(i), 
-								Main.Times.get(i), Main.Prices.get(i), 
-								Main.Seats.get(i)
-			);
-		}
-	}
+    private void changePassword() {
+        System.out.print("Enter new password: ");
+        this.pass = scanner.next();
+        System.out.println();
+    }
 
-	private void BookingTicket() {
-		System.out.print("Enter flight id: ");
-		String userId = scanner.next();
-		System.out.println();
+    private void searchFlightTickets(Schedule schedule) {
+        System.out.print("Enter Flightid: ");
+        String inFlightid = scanner.next();
+        System.out.println();
 
-		int menuIndex = Main.FlightIds.indexOf(userId);
-		if (menuIndex >= 0) {
-			tickets.add(userId);
-			ticketIds.add(rand.nextInt(10000));
-			charge -= Main.Prices.get(menuIndex);
-		}
-	}
+        int index = -1, i = 0;
+        for (Flight flight : schedule.getFlights())
+        {
+            if (inFlightid.equals(flight.getFlightid()))
+            {
+                index = i;
+                break;
+            }
+            i++;
+        }
 
-	private void TicketCancellation() {
-		System.out.print("Enter the ticket id: ");
-		int userId = scanner.nextInt();
-		System.out.println();
+        if (index >= 0) {
+            schedule.print(index);
+        }
+    }
 
-		int index = ticketIds.indexOf(userId);
-		if (index >= 0) {
-			tickets.remove(index);
-			ticketIds.remove(index);
-			int menuIndex = Main.FlightIds.indexOf(tickets.get(index));
-			charge += Main.Prices.get(menuIndex);
-		}
-	}
+    private void bookingTicket(ArrayList<Flight> flights) {
+        System.out.print("Enter Flightid: ");
+        String inFlightid = scanner.next();
+        System.out.println();
 
-	private void BookedTickets()
-	{
-		for (int i = 0, i < tickets.size(), i++)
-		{
-			System.out.println("| " + tickets.get(i) + " | "
-					+ ticketIds.get(i) + " |");
-		}
-	}
+        int price = 0;
+        int index = -1, i = 0;
+        for (Flight flight : flights)
+        {
+            if (inFlightid.equals(flight.getFlightid()))
+            {
+                index = i;
+                price = flight.getPrice();
+                break;
+            }
+            i++;
+        }
 
-	private void AddCharge() {
-		System.out.print("Enter the amount: ");
-		charge += scanner.nextInt();
-		System.out.println();
-	}
+        if (index >= 0) {
+            tickets.add(inFlightid);
+            ticketIds.add(rand.nextInt(10000));
+            charge -= price;
+        }
+    }
+
+    private void ticketCancellation(ArrayList<Flight> flights) {
+        System.out.print("Enter Ticketid: ");
+        int inTicketid= scanner.nextInt();
+        System.out.println();
+
+        int index = ticketIds.indexOf(inTicketid);
+        String inFlightid = tickets.get(index);
+
+        int price = 0;
+        int index = -1, i = 0;
+        for (Flight flight : flights)
+        {
+            if (inFlightid.equals(flight.getFlightid()))
+            {
+                index = i;
+                price = flight.getPrice();
+                break;
+            }
+            i++;
+        }
+
+        if (index >= 0) {
+            tickets.remove(index);
+            ticketIds.remove(index);
+            charge += price;
+        }
+    }
+
+    private void bookedTickets()
+    {
+        for (int i = 0, i < tickets.size(), i++)
+        {
+            System.out.println("| " + tickets.get(i) + " | "
+                            + ticketIds.get(i) + " |");
+            System.out.println("........................................."
+                            + ".........................................");
+        }
+    }
+
+    private void addCharge() {
+        System.out.print("Enter the amount: ");
+        charge += scanner.nextInt();
+        System.out.println();
+    }
 }

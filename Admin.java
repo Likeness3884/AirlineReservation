@@ -1,9 +1,22 @@
+import java.util.Scanner;
+
 public class Admin {
-    private static String[] parts = { "Flightid", "Origin", "Destination",
-                                      "Date", "Time", "Price", "Seats" };
     private String name;
     private String pass;
     private Schedule schedule;
+    private static String[] parts = { "Flightid", "Origin", "Destination",
+                                      "Date", "Time", "Price", "Seats" };
+    private Scanner scanner = new Scanner(System.in);
+
+    public String getName()
+    {
+        return this.name;
+    }
+
+    public String getPass()
+    {
+        return this.pass;
+    }
 
     public Admin(String name, String pass, Schedule schedule) {
         this.name = name;
@@ -11,7 +24,7 @@ public class Admin {
         this.schedule = schedule;
     }
 
-    public void ShowMenu(Schedule schedule, Scanner scanner) {
+    public void ShowMenu(Schedule schedule) {
         Boolean flag = true;
         while (flag) {
             System.out.println(
@@ -83,9 +96,9 @@ public class Admin {
             i++;
         }
 
-        if (id >= 0) {
+        if (index >= 0) {
             Flight flight = new Flight();
-            flight.setFlightid(inFlight);
+            flight.setFlightid(inFlightid);
             System.out.print("Enter " + parts[1] + ": ");
             flight.setOrigin(scanner.next());
             System.out.print("Enter " + parts[2] + ": ");
@@ -98,7 +111,7 @@ public class Admin {
             flight.setPrice(scanner.nextInt());
             System.out.print("Enter " + parts[6] + ": ");
             flight.setSeat(scanner.nextInt());
-            schedule.update(id, flight);
+            schedule.update(index, flight);
         }
     }
 
@@ -107,7 +120,7 @@ public class Admin {
         String inFlightid = scanner.next();
 
         int index = -1, i = 0;
-        for (String flight : schedule.getFlights()) {
+        for (Flight flight : schedule.getFlights()) {
             if (inFlightid.equals(flight.getFlightid())) {
                 index = i;
                 break;

@@ -38,8 +38,8 @@ public class Home {
                 case 1:
                     int index = signIn();
                     if (index >= -1) {
-                        if (index == -1) admin.ShowMenu(schedule, scanner);
-                        else passengers.get(index).ShowMenu(schedule, scanner);
+                        if (index == -1) admin.ShowMenu(schedule);
+                        else passengers.get(index).ShowMenu(schedule);
                     }
                     break;
                 case 2:

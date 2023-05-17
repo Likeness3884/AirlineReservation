@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Passenger {
     private String name;
@@ -10,6 +11,7 @@ public class Passenger {
     private String[] parts = { "FlightId", "Origin", "Destination",
                         "Date", "Time", "Price", "Seats" };
     private Random rand = new Random();
+    private Scanner scanner = new Scanner(System.in);
 
     public Passenger(String name, String pass) {
         this.name = name;
@@ -19,7 +21,12 @@ public class Passenger {
 
     public String getName()
     {
-        return name;
+        return this.name;
+    }
+
+    public String getPass()
+    {
+        return this.pass;
     }
 
     public void setName(String name)
@@ -27,7 +34,7 @@ public class Passenger {
         this.name = name;
     }
 
-    public void ShowMenu(Schedule schedule, Scanner scanner) {
+    public void ShowMenu(Schedule schedule) {
         Boolean flag = true;
         while (flag) {
             System.out.println(
@@ -55,13 +62,13 @@ public class Passenger {
                     changePassword();
                     break;
                 case 2:
-                    searchFlightTickets();
+                    searchFlightTickets(schedule);
                     break;
                 case 3:
-                    bookingTicket();
+                    bookingTicket(schedule.getFlights());
                     break;
                 case 4:
-                    ticketCancellation();
+                    ticketCancellation(schedule.getFlights());
                     break;
                 case 5:
                     bookedTickets();
@@ -133,8 +140,8 @@ public class Passenger {
         int inTicketid= scanner.nextInt();
         System.out.println();
 
-        int index = ticketIds.indexOf(inTicketid);
-        String inFlightid = tickets.get(index);
+        int ticketIndex = ticketIds.indexOf(inTicketid);
+        String inFlightid = tickets.get(ticketIndex);
 
         int price = 0;
         int index = -1, i = 0;
@@ -158,7 +165,7 @@ public class Passenger {
 
     private void bookedTickets()
     {
-        for (int i = 0, i < tickets.size(), i++)
+        for (int i = 0; i < tickets.size(); i++)
         {
             System.out.println("| " + tickets.get(i) + " | "
                             + ticketIds.get(i) + " |");

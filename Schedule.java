@@ -20,9 +20,9 @@ public class Schedule
         this.size = 0;
     }
 
-    public void add(Schedule schedule)
+    public void add(Flight flight)
     {
-        flights.add(schedule);
+        flights.add(flight);
         this.size++;
     }
 
@@ -52,9 +52,9 @@ public class Schedule
         else
         {
             Flight flight = flights.get(index);
-            System.out.format(format, flight.getFlightids(), flight.getOrigins(),
-                            flight.getDestinations(), flight.getDates(),
-                            flight.getTimes(), flight.getPrices(), flight.getSeats());
+            System.out.format(format, flight.getFlightid(), flight.getOrigin(),
+                            flight.getDestination(), flight.getDate(),
+                            flight.getTime(), flight.getPrice(), flight.getSeat());
             System.out.println("........................................."
                             + ".........................................");
         }

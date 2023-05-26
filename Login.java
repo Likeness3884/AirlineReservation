@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Home {
+public class Login {
     private Scanner scanner = new Scanner(System.in);
     private Schedule schedule = new Schedule();
     private Admin admin = new Admin("Admin", "Admin", schedule);

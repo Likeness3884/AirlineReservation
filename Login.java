@@ -18,7 +18,8 @@ public class Login {
     }
 
     public void ShowMenu() {
-        while (true) {
+        Boolean flag = true;
+        while (flag) {
             System.out.println(
                   "\n"
                 + ":::::::::::::::::::::::::::::::::::::::::::::::\n"
@@ -28,6 +29,7 @@ public class Login {
                 + "\n"
                 + "    <1> Sign in\n"
                 + "    <2> Sign up\n"
+                + "    <0> Exit\n"
             );
 
             System.out.print("Enter your choose: ");
@@ -45,6 +47,8 @@ public class Login {
                 case 2:
                     signUp();
                     break;
+                case 0:
+                    flag = false;
             }
         }
     }

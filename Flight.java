@@ -19,6 +19,19 @@ public class Flight
 		this.seat = 0;
 	}
 
+    public String toString()
+    {
+        String strInfo = "";
+        strInfo += flightid;
+        strInfo += origin;
+        strInfo += destination;
+        strInfo += date;
+        strInfo += time;
+        strinfo += price.toString();
+        strInfo += seat.toString();
+        return strInfo;
+    }
+
     public String getFlightid()
     {
         return this.flightid;

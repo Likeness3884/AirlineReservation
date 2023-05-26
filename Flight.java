@@ -27,8 +27,8 @@ public class Flight
         strInfo += destination;
         strInfo += date;
         strInfo += time;
-        strinfo += price.toString();
-        strInfo += seat.toString();
+        strInfo += Integer.toString(price);
+        strInfo += Integer.toString(seat);
         return strInfo;
     }
 

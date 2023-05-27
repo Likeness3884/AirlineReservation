@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Login {
+public class Login
+{
     private Scanner scanner = new Scanner(System.in);
     private Schedule schedule = new Schedule();
     private Admin admin = new Admin("Admin", "Admin", schedule);
@@ -17,7 +18,8 @@ public class Login {
         this.schedule = schedule;
     }
 
-    public void ShowMenu() {
+    public void ShowMenu()
+    {
         Boolean flag = true;
         while (flag) {
             System.out.println(
@@ -36,10 +38,12 @@ public class Login {
             int choose = scanner.nextInt();
             System.out.println();
 
-            switch (choose) {
+            switch (choose)
+            {
                 case 1:
                     int index = signIn();
-                    if (index >= -1) {
+                    if (index >= -1)
+                    {
                         if (index == -1) admin.ShowMenu(schedule);
                         else passengers.get(index).ShowMenu(schedule);
                     }
@@ -53,21 +57,25 @@ public class Login {
         }
     }
 
-    private int signIn() {
+    private int signIn()
+    {
         System.out.print("Enter Username: ");
         String inName = scanner.next();
 
         Boolean bFind = false;
 
         Boolean bAdmin = false;
-        if (inName.equals(admin.getName())) {
+        if (inName.equals(admin.getName()))
+        {
             bFind = true;
             bAdmin = true;
         }
 
         int index = 0;
-        for (Passenger passenger : passengers) {
-            if (inName.equals(passenger.getName())) {
+        for (Passenger passenger : passengers)
+        {
+            if (inName.equals(passenger.getName()))
+            {
                 bFind = true;
                 break;
             }
@@ -79,12 +87,14 @@ public class Login {
         System.out.print("Enter Password: ");
         String inPass = scanner.next();
 
-        if (bAdmin) {
+        if (bAdmin)
+        {
             if (inPass.equals(admin.getPass())) return -1;
         }
         else if (bFind)
         {
-            if (inPass.equals(passengers.get(index).getPass())) {
+            if (inPass.equals(passengers.get(index).getPass()))
+            {
                 return index;
             }
         }
@@ -92,13 +102,16 @@ public class Login {
         return -2;
     }
 
-    private void signUp() {
+    private void signUp()
+    {
         System.out.print("Enter Username: ");
         String inName = scanner.next();
 
         if (inName.equals(admin.getName())) return;
-        for (Passenger passenger : passengers) {
-            if (inName.contentEquals(passenger.getName())) {
+        for (Passenger passenger : passengers)
+        {
+            if (inName.contentEquals(passenger.getName()))
+            {
                 return;
             }
         }

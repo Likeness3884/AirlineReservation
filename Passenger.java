@@ -2,7 +2,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Passenger {
+public class Passenger
+{
     private String name;
     private String pass;
     private int charge;
@@ -13,7 +14,8 @@ public class Passenger {
     private Random rand = new Random();
     private Scanner scanner = new Scanner(System.in);
 
-    public Passenger(String name, String pass) {
+    public Passenger(String name, String pass)
+    {
         this.name = name;
         this.pass = pass;
         this.charge = 0;
@@ -34,9 +36,11 @@ public class Passenger {
         this.name = name;
     }
 
-    public void ShowMenu(Schedule schedule) {
+    public void ShowMenu(Schedule schedule)
+    {
         Boolean flag = true;
-        while (flag) {
+        while (flag)
+        {
             System.out.println(
                   "\n"
                 + "::::::::::::::::::::::::::::::\n"
@@ -57,7 +61,8 @@ public class Passenger {
             int choose = scanner.nextInt();
             System.out.println();
 
-            switch (choose) {
+            switch (choose)
+            {
                 case 1:
                     changePassword();
                     break;
@@ -78,18 +83,19 @@ public class Passenger {
                     break;
                 case 0:
                     flag = false;
-                    break;
             }
         }
     }
 
-    private void changePassword() {
+    private void changePassword()
+    {
         System.out.print("Enter new password: ");
         this.pass = scanner.next();
         System.out.println();
     }
 
-    private void searchFlightTickets(Schedule schedule) {
+    private void searchFlightTickets(Schedule schedule)
+    {
         System.out.print("Enter Flightid: ");
         String inFlightid = scanner.next();
         System.out.println();
@@ -105,12 +111,14 @@ public class Passenger {
             i++;
         }
 
-        if (index >= 0) {
+        if (index >= 0)
+        {
             schedule.print(index);
         }
     }
 
-    private void bookingTicket(ArrayList<Flight> flights) {
+    private void bookingTicket(ArrayList<Flight> flights)
+    {
         System.out.print("Enter Flightid: ");
         String inFlightid = scanner.next();
         System.out.println();
@@ -128,14 +136,16 @@ public class Passenger {
             i++;
         }
 
-        if (index >= 0) {
+        if (index >= 0)
+        {
             tickets.add(inFlightid);
             ticketIds.add(rand.nextInt(10000));
             charge -= price;
         }
     }
 
-    private void ticketCancellation(ArrayList<Flight> flights) {
+    private void ticketCancellation(ArrayList<Flight> flights)
+    {
         System.out.print("Enter Ticketid: ");
         int inTicketid= scanner.nextInt();
         System.out.println();
@@ -156,7 +166,8 @@ public class Passenger {
             i++;
         }
 
-        if (index >= 0) {
+        if (index >= 0)
+        {
             tickets.remove(index);
             ticketIds.remove(index);
             charge += price;
@@ -170,11 +181,12 @@ public class Passenger {
             System.out.println("| " + tickets.get(i) + " | "
                             + ticketIds.get(i) + " |");
             System.out.println("........................................."
-                            + ".........................................");
+                            + "..........................................");
         }
     }
 
-    private void addCharge() {
+    private void addCharge()
+    {
         System.out.print("Enter the amount: ");
         charge += scanner.nextInt();
         System.out.println();

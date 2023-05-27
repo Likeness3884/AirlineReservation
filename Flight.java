@@ -1,23 +1,23 @@
 public class Flight
 {
-	private String flightid;
-	private String origin;
-	private String destination;
-	private String date;
-	private String time;
-	private int price;
-	private int seat;
+    private String flightid;
+    private String origin;
+    private String destination;
+    private String date;
+    private String time;
+    private int price;
+    private int seat;
 
-	public Flight()
-	{
-		this.flightid = "";
-		this.origin = "";
-		this.destination = "";
-		this.date = "";
-		this.time = "";
-		this.price = 0;
-		this.seat = 0;
-	}
+    public Flight()
+    {
+        this.flightid = "";
+        this.origin = "";
+        this.destination = "";
+        this.date = "";
+        this.time = "";
+        this.price = 0;
+        this.seat = 0;
+    }
 
     public String toString()
     {
@@ -67,38 +67,38 @@ public class Flight
         return this.seat;
     }
 
-	public void setFlightid(String flightid)
-	{
-		this.flightid = flightid;
-	}
+    public void setFlightid(String flightid)
+    {
+        this.flightid = flightid;
+    }
 
-	public void setOrigin(String origin)
-	{
-		this.origin = origin;
-	}
+    public void setOrigin(String origin)
+    {
+        this.origin = origin;
+    }
 
-	public void setDestination(String destination)
-	{
-		this.destination = destination;
-	}
+    public void setDestination(String destination)
+    {
+        this.destination = destination;
+    }
 
-	public void setDate(String date)
-	{
-		this.date = date;
-	}
+    public void setDate(String date)
+    {
+        this.date = date;
+    }
 
-	public void setTime(String time)
-	{
-		this.time = time;
-	}
+    public void setTime(String time)
+    {
+        this.time = time;
+    }
 
-	public void setPrice(int price)
-	{
-		this.price = price;
-	}
+    public void setPrice(int price)
+    {
+        this.price = price;
+    }
 
-	public void setSeat(int seat)
-	{
-		this.seat = seat;
-	}
+    public void setSeat(int seat)
+    {
+        this.seat = seat;
+    }
 }

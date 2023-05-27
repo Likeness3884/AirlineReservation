@@ -1,12 +1,20 @@
 import java.util.Scanner;
 
-public class Admin {
+public class Admin
+{
     private String name;
     private String pass;
     private Schedule schedule;
     private static String[] parts = { "Flightid", "Origin", "Destination",
                                       "Date", "Time", "Price", "Seats" };
     private Scanner scanner = new Scanner(System.in);
+
+    public Admin(String name, String pass, Schedule schedule)
+    {
+        this.name = name;
+        this.pass = pass;
+        this.schedule = schedule;
+    }
 
     public String getName()
     {
@@ -18,15 +26,11 @@ public class Admin {
         return this.pass;
     }
 
-    public Admin(String name, String pass, Schedule schedule) {
-        this.name = name;
-        this.pass = pass;
-        this.schedule = schedule;
-    }
-
-    public void ShowMenu(Schedule schedule) {
+    public void ShowMenu(Schedule schedule)
+    {
         Boolean flag = true;
-        while (flag) {
+        while (flag)
+        {
             System.out.println(
                       "\n"
                     + "::::::::::::::::::::::::::::::::::::::::\n"
@@ -44,7 +48,8 @@ public class Admin {
             int choose = scanner.nextInt();
             System.out.println();
 
-            switch (choose) {
+            switch (choose)
+            {
                 case 1:
                     add();
                     break;
@@ -59,12 +64,12 @@ public class Admin {
                     break;
                 case 0:
                     flag = false;
-                    break;
             }
         }
     }
 
-    private void add() {
+    private void add()
+    {
         Flight flight = new Flight();
         System.out.print("Enter " + parts[0] + ": ");
         flight.setFlightid(scanner.next());
@@ -83,20 +88,24 @@ public class Admin {
         schedule.add(flight);
     };
 
-    private void update() {
+    private void update()
+    {
         System.out.print("Enter Flightid: ");
         String inFlightid = scanner.next();
 
         int index = -1, i = 0;
-        for (Flight flight : schedule.getFlights()) {
-            if (inFlightid.equals(flight.getFlightid())) {
+        for (Flight flight : schedule.getFlights())
+        {
+            if (inFlightid.equals(flight.getFlightid()))
+            {
                 index = i;
                 break;
             }
             i++;
         }
 
-        if (index >= 0) {
+        if (index >= 0)
+        {
             Flight flight = new Flight();
             flight.setFlightid(inFlightid);
             System.out.print("Enter " + parts[1] + ": ");
@@ -115,25 +124,30 @@ public class Admin {
         }
     }
 
-    private void remove() {
+    private void remove()
+    {
         System.out.print("Enter Flightid: ");
         String inFlightid = scanner.next();
 
         int index = -1, i = 0;
-        for (Flight flight : schedule.getFlights()) {
-            if (inFlightid.equals(flight.getFlightid())) {
+        for (Flight flight : schedule.getFlights())
+        {
+            if (inFlightid.equals(flight.getFlightid()))
+            {
                 index = i;
                 break;
             }
             i++;
         }
 
-        if (index >= 0) {
+        if (index >= 0)
+        {
             schedule.delete(index);
         }
     }
 
-    private void flightSchedules() {
+    private void flightSchedules()
+    {
         for (int i = -1; i < schedule.size; i++)
         {
             schedule.print(i);

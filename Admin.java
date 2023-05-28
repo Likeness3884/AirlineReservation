@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Admin
 {
@@ -44,9 +45,20 @@ public class Admin
                     + "    <0> Sign out\n"
             );
 
-            System.out.print("Enter your choose: ");
-            int choose = scanner.nextInt();
-            System.out.println();
+            int choose = -1;
+            Boolean bValid = false;
+            while (!bValid)
+            {
+                try {
+                    System.out.print("Enter your choose: ");
+                    choose = scanner.nextInt();
+                    System.out.println();
+                    bValid = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("Not a number!");
+                    scanner.next();
+                }
+            }
 
             switch (choose)
             {
@@ -64,29 +76,42 @@ public class Admin
                     break;
                 case 0:
                     flag = false;
+                    break;
+                default:
+                    System.out.println("Not a valid number!");
             }
         }
     }
 
     private void add()
     {
-        Flight flight = new Flight();
-        System.out.print("Enter " + parts[0] + ": ");
-        flight.setFlightid(scanner.next());
-        System.out.print("Enter " + parts[1] + ": ");
-        flight.setOrigin(scanner.next());
-        System.out.print("Enter " + parts[2] + ": ");
-        flight.setDestination(scanner.next());
-        System.out.print("Enter " + parts[3] + ": ");
-        flight.setDate(scanner.next());
-        System.out.print("Enter " + parts[4] + ": ");
-        flight.setTime(scanner.next());
-        System.out.print("Enter " + parts[5] + ": ");
-        flight.setPrice(scanner.nextInt());
-        System.out.print("Enter " + parts[6] + ": ");
-        flight.setSeats(scanner.nextInt());
-        schedule.add(flight);
-    };
+        Boolean bValid = false;
+        while (!bValid)
+        {
+            try {
+                Flight flight = new Flight();
+                System.out.print("Enter " + parts[0] + ": ");
+                flight.setFlightid(scanner.next());
+                System.out.print("Enter " + parts[1] + ": ");
+                flight.setOrigin(scanner.next());
+                System.out.print("Enter " + parts[2] + ": ");
+                flight.setDestination(scanner.next());
+                System.out.print("Enter " + parts[3] + ": ");
+                flight.setDate(scanner.next());
+                System.out.print("Enter " + parts[4] + ": ");
+                flight.setTime(scanner.next());
+                System.out.print("Enter " + parts[5] + ": ");
+                flight.setPrice(scanner.nextInt());
+                System.out.print("Enter " + parts[6] + ": ");
+                flight.setSeats(scanner.nextInt());
+                schedule.add(flight);
+                bValid = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Not a number!");
+                scanner.next();
+            }
+        }
+    }
 
     private void update()
     {
@@ -104,23 +129,36 @@ public class Admin
             i++;
         }
 
-        if (index >= 0)
+        if (index == -1)
         {
-            Flight flight = new Flight();
-            flight.setFlightid(inFlightid);
-            System.out.print("Enter " + parts[1] + ": ");
-            flight.setOrigin(scanner.next());
-            System.out.print("Enter " + parts[2] + ": ");
-            flight.setDestination(scanner.next());
-            System.out.print("Enter " + parts[3] + ": ");
-            flight.setDate(scanner.next());
-            System.out.print("Enter " + parts[4] + ": ");
-            flight.setTime(scanner.next());
-            System.out.print("Enter " + parts[5] + ": ");
-            flight.setPrice(scanner.nextInt());
-            System.out.print("Enter " + parts[6] + ": ");
-            flight.setSeats(scanner.nextInt());
-            schedule.update(index, flight);
+            System.out.println("Flightid not found!");
+            return;
+        }
+
+        Boolean bValid = false;
+        while (!bValid)
+        {
+            try {
+                Flight flight = new Flight();
+                flight.setFlightid(inFlightid);
+                System.out.print("Enter " + parts[1] + ": ");
+                flight.setOrigin(scanner.next());
+                System.out.print("Enter " + parts[2] + ": ");
+                flight.setDestination(scanner.next());
+                System.out.print("Enter " + parts[3] + ": ");
+                flight.setDate(scanner.next());
+                System.out.print("Enter " + parts[4] + ": ");
+                flight.setTime(scanner.next());
+                System.out.print("Enter " + parts[5] + ": ");
+                flight.setPrice(scanner.nextInt());
+                System.out.print("Enter " + parts[6] + ": ");
+                flight.setSeats(scanner.nextInt());
+                schedule.update(index, flight);
+                bValid = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Not a number!");
+                scanner.next();
+            }
         }
     }
 
@@ -140,10 +178,13 @@ public class Admin
             i++;
         }
 
-        if (index >= 0)
+        if (index == -1)
         {
-            schedule.delete(index);
+            System.out.println("Flightid not found!");
+            return;
         }
+
+        schedule.delete(index);
     }
 
     private void flightSchedules()

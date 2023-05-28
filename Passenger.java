@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Passenger
 {
@@ -59,9 +60,20 @@ public class Passenger
                 + "    <0> Sign out\n"
             );
 
-            System.out.print("Enter number: ");
-            int choose = scanner.nextInt();
-            System.out.println();
+            int choose = -1;
+            Boolean bValid = false;
+            while (!bValid)
+            {
+                try {
+                    System.out.print("Enter your choose: ");
+                    choose = scanner.nextInt();
+                    System.out.println();
+                    bValid = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("Not a number!");
+                    scanner.next();
+                }
+            }
 
             switch (choose)
             {
@@ -85,6 +97,9 @@ public class Passenger
                     break;
                 case 0:
                     flag = false;
+                    break;
+                default:
+                    System.out.println("Not a valid number!");
             }
         }
     }
@@ -113,10 +128,13 @@ public class Passenger
             i++;
         }
 
-        if (index >= 0)
+        if (index == -1)
         {
-            schedule.print(index);
+            System.out.println("Flightid not found!");
+            return;
         }
+
+        schedule.print(index);
     }
 
     private void bookingTicket()
@@ -144,25 +162,23 @@ public class Passenger
             System.out.println("Flightid not found!");
             return;
         }
+
+        price = iFlight.getPrice();
+        int seats = iFlight.getSeats();
+        if (seats <= 0)
+        {
+            System.out.println("Not enough seats!");
+        }
+        else if (charge < price)
+        {
+            System.out.println("Not enough money :/");
+        }
         else
         {
-            price = iFlight.getPrice();
-            int seats = iFlight.getSeats();
-            if (seats <= 0)
-            {
-                System.out.println("Not enough seats!");
-            }
-            else if (charge < price)
-            {
-                System.out.println("Not enough money :/");
-            }
-            else
-            {
-                tickets.add(inFlightid);
-                ticketIds.add(rand.nextInt(10000));
-                charge -= price;
-                iFlight.setSeats(--seats);
-            }
+            tickets.add(inFlightid);
+            ticketIds.add(rand.nextInt(10000));
+            charge -= price;
+            iFlight.setSeats(--seats);
         }
     }
 
@@ -188,12 +204,15 @@ public class Passenger
             i++;
         }
 
-        if (index >= 0)
+        if (index == -1)
         {
-            tickets.remove(index);
-            ticketIds.remove(index);
-            charge += price;
+            System.out.println("Ticketid not found!");
+            return;
         }
+
+        tickets.remove(index);
+        ticketIds.remove(index);
+        charge += price;
     }
 
     private void bookedTickets()
@@ -209,8 +228,18 @@ public class Passenger
 
     private void addCharge()
     {
-        System.out.print("Enter the amount: ");
-        charge += scanner.nextInt();
-        System.out.println();
+        Boolean bValid = false;
+        while (!bValid)
+        {
+            try {
+                System.out.print("Enter the amount: ");
+                charge += scanner.nextInt();
+                System.out.println();
+                bValid = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Not a number!");
+                scanner.next();
+            }
+        }
     }
 }

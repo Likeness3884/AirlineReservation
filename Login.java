@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Login
 {
@@ -34,30 +35,39 @@ public class Login
                 + "    <0> Exit\n"
             );
 
-            System.out.print("Enter your choose: ");
-            int choose = scanner.nextInt();
-            System.out.println();
+            int choose = -1;
+            Boolean bValid = false;
+            while (!bValid)
+            {
+                try {
+                    System.out.print("Enter your choose: ");
+                    choose = scanner.nextInt();
+                    System.out.println();
+                    bValid = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("Not a number!");
+                    scanner.next();
+                }
+            }
 
             switch (choose)
             {
                 case 1:
-                    int index = signIn();
-                    if (index >= -1)
-                    {
-                        if (index == -1) admin.ShowMenu();
-                        else passengers.get(index).ShowMenu();
-                    }
+                    signIn();
                     break;
                 case 2:
                     signUp();
                     break;
                 case 0:
                     flag = false;
+                    break;
+                default:
+                    System.out.println("Not a valid number!");
             }
         }
     }
 
-    private int signIn()
+    private void signIn()
     {
         System.out.print("Enter Username: ");
         String inName = scanner.next();
@@ -82,24 +92,29 @@ public class Login
             index++;
         }
 
-        if (!bFind) return -2;
+        if (!bFind)
+        {
+            System.out.println("Username not found!");
+            return;
+        }
 
         System.out.print("Enter Password: ");
         String inPass = scanner.next();
 
         if (bAdmin)
         {
-            if (inPass.equals(admin.getPass())) return -1;
+            if (inPass.equals(admin.getPass())) admin.ShowMenu();
+            else System.out.println("Password is wrong!");
+            return;
         }
-        else if (bFind)
+        else
         {
             if (inPass.equals(passengers.get(index).getPass()))
             {
-                return index;
+                passengers.get(index).ShowMenu();
             }
+            else System.out.println("Password is wrong!");
         }
-
-        return -2;
     }
 
     private void signUp()
@@ -112,6 +127,7 @@ public class Login
         {
             if (inName.contentEquals(passenger.getName()))
             {
+                System.out.println("Username already exist!");
                 return;
             }
         }

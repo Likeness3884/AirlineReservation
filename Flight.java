@@ -62,7 +62,7 @@ public class Flight
         return this.price;
     }
 
-    public int getSeat()
+    public int getSeats()
     {
         return this.seat;
     }
@@ -97,7 +97,7 @@ public class Flight
         this.price = price;
     }
 
-    public void setSeat(int seat)
+    public void setSeats(int seat)
     {
         this.seat = seat;
     }

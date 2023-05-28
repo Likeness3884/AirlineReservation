@@ -54,7 +54,7 @@ public class Schedule
             Flight flight = flights.get(index);
             System.out.format(format, flight.getFlightid(), flight.getOrigin(),
                             flight.getDestination(), flight.getDate(),
-                            flight.getTime(), flight.getPrice(), flight.getSeat());
+                            flight.getTime(), flight.getPrice(), flight.getSeats());
             System.out.println("........................................."
                             + "..........................................");
         }

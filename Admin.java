@@ -84,7 +84,7 @@ public class Admin
         System.out.print("Enter " + parts[5] + ": ");
         flight.setPrice(scanner.nextInt());
         System.out.print("Enter " + parts[6] + ": ");
-        flight.setSeat(scanner.nextInt());
+        flight.setSeats(scanner.nextInt());
         schedule.add(flight);
     };
 
@@ -119,7 +119,7 @@ public class Admin
             System.out.print("Enter " + parts[5] + ": ");
             flight.setPrice(scanner.nextInt());
             System.out.print("Enter " + parts[6] + ": ");
-            flight.setSeat(scanner.nextInt());
+            flight.setSeats(scanner.nextInt());
             schedule.update(index, flight);
         }
     }

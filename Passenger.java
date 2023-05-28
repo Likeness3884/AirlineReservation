@@ -127,22 +127,42 @@ public class Passenger
 
         int price = 0;
         int index = -1, i = 0;
+        Flight iFlight = null;
         for (Flight flight : schedule.getFlights())
         {
             if (inFlightid.equals(flight.getFlightid()))
             {
                 index = i;
-                price = flight.getPrice();
+                iFlight = flight;
                 break;
             }
             i++;
         }
 
-        if (index >= 0)
+        if (index < 0)
         {
-            tickets.add(inFlightid);
-            ticketIds.add(rand.nextInt(10000));
-            charge -= price;
+            System.out.println("Flightid not found!");
+            return;
+        }
+        else
+        {
+            price = iFlight.getPrice();
+            int seats = iFlight.getSeats();
+            if (seats <= 0)
+            {
+                System.out.println("Not enough seats!");
+            }
+            else if (charge < price)
+            {
+                System.out.println("Not enough money :/");
+            }
+            else
+            {
+                tickets.add(inFlightid);
+                ticketIds.add(rand.nextInt(10000));
+                charge -= price;
+                iFlight.setSeats(--seats);
+            }
         }
     }
 

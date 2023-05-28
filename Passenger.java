@@ -7,6 +7,7 @@ public class Passenger
     private String name;
     private String pass;
     private int charge;
+    private Schedule schedule = null;
     private ArrayList<String> tickets = new ArrayList<String>();
     private ArrayList<Integer> ticketIds = new ArrayList<Integer>();
     private String[] parts = { "FlightId", "Origin", "Destination",
@@ -14,11 +15,12 @@ public class Passenger
     private Random rand = new Random();
     private Scanner scanner = new Scanner(System.in);
 
-    public Passenger(String name, String pass)
+    public Passenger(String name, String pass, Schedule schedule)
     {
         this.name = name;
         this.pass = pass;
         this.charge = 0;
+        this.schedule = schedule;
     }
 
     public String getName()
@@ -36,7 +38,7 @@ public class Passenger
         this.name = name;
     }
 
-    public void ShowMenu(Schedule schedule)
+    public void ShowMenu()
     {
         Boolean flag = true;
         while (flag)
@@ -67,13 +69,13 @@ public class Passenger
                     changePassword();
                     break;
                 case 2:
-                    searchFlightTickets(schedule);
+                    searchFlightTickets();
                     break;
                 case 3:
-                    bookingTicket(schedule.getFlights());
+                    bookingTicket();
                     break;
                 case 4:
-                    ticketCancellation(schedule.getFlights());
+                    ticketCancellation();
                     break;
                 case 5:
                     bookedTickets();
@@ -94,7 +96,7 @@ public class Passenger
         System.out.println();
     }
 
-    private void searchFlightTickets(Schedule schedule)
+    private void searchFlightTickets()
     {
         System.out.print("Enter Flightid: ");
         String inFlightid = scanner.next();
@@ -117,7 +119,7 @@ public class Passenger
         }
     }
 
-    private void bookingTicket(ArrayList<Flight> flights)
+    private void bookingTicket()
     {
         System.out.print("Enter Flightid: ");
         String inFlightid = scanner.next();
@@ -125,7 +127,7 @@ public class Passenger
 
         int price = 0;
         int index = -1, i = 0;
-        for (Flight flight : flights)
+        for (Flight flight : schedule.getFlights())
         {
             if (inFlightid.equals(flight.getFlightid()))
             {
@@ -144,7 +146,7 @@ public class Passenger
         }
     }
 
-    private void ticketCancellation(ArrayList<Flight> flights)
+    private void ticketCancellation()
     {
         System.out.print("Enter Ticketid: ");
         int inTicketid= scanner.nextInt();
@@ -155,7 +157,7 @@ public class Passenger
 
         int price = 0;
         int index = -1, i = 0;
-        for (Flight flight : flights)
+        for (Flight flight : schedule.getFlights())
         {
             if (inFlightid.equals(flight.getFlightid()))
             {

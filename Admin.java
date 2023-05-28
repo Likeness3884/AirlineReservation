@@ -4,7 +4,7 @@ public class Admin
 {
     private String name;
     private String pass;
-    private Schedule schedule;
+    private Schedule schedule = null;
     private static String[] parts = { "Flightid", "Origin", "Destination",
                                       "Date", "Time", "Price", "Seats" };
     private Scanner scanner = new Scanner(System.in);
@@ -26,7 +26,7 @@ public class Admin
         return this.pass;
     }
 
-    public void ShowMenu(Schedule schedule)
+    public void ShowMenu()
     {
         Boolean flag = true;
         while (flag)

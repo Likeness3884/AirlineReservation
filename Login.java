@@ -44,8 +44,8 @@ public class Login
                     int index = signIn();
                     if (index >= -1)
                     {
-                        if (index == -1) admin.ShowMenu(schedule);
-                        else passengers.get(index).ShowMenu(schedule);
+                        if (index == -1) admin.ShowMenu();
+                        else passengers.get(index).ShowMenu();
                     }
                     break;
                 case 2:
@@ -119,7 +119,7 @@ public class Login
         System.out.print("Enter Password: ");
         String inPass = scanner.next();
 
-        Passenger passenger = new Passenger(inName, inPass);
+        Passenger passenger = new Passenger(inName, inPass, schedule);
         passengers.add(passenger);
     }
 }

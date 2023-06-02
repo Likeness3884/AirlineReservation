@@ -202,12 +202,12 @@ public class Passenger
 
     private void tickets()
     {
+        System.out.format("|%-9s|%-9s|\n", "Ticket", "TicketId");
+        System.out.println(".....................");
         for (int i = 0; i < tickets.size(); i++)
         {
-            System.out.println("| " + tickets.get(i) + " | "
-                            + ticketIds.get(i) + " |");
-            System.out.println("........................................."
-                            + "..........................................");
+            System.out.format("|%-9s|%-9s|\n", tickets.get(i), ticketIds.get(i));
+            System.out.println(".....................");
         }
     }
 

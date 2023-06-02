@@ -22,15 +22,9 @@ public class Flight
 
     public String toString()
     {
-        String strInfo = "";
-        strInfo += flightid;
-        strInfo += origin;
-        strInfo += destination;
-        strInfo += date;
-        strInfo += time;
-        strInfo += Integer.toString(price);
-        strInfo += Integer.toString(seats);
-        return strInfo;
+        return String.format("|%-9s|%-9s|%-12s|%-11s|%-6s|%-,10d|%-5d|",
+                                flightid, origin, destination, date,
+                                time, price * 1000, seats);
     }
 
     public String getFlightid()

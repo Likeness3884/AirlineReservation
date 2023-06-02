@@ -52,25 +52,15 @@ public class Schedule
 
     public void print(int index)
     {
-        String format = "|%-11s|%-11s|%-13s|%-12s|%-11s|%-11s|%-6s|\n";
-        if (index == -1)
-        {
-            String[] parts = { "Flightid", "Origin", "Destination",
-                            "Date", "Time", "Price", "Seats" };
-            System.out.format(format, parts[0], parts[1], parts[2],
-                            parts[3], parts[4], parts[5], parts[6]);
-            System.out.println("........................................."
-                            + "..........................................");
+        if (index == -1) {
+            System.out.format("|%-9s|%-9s|%-12s|%-11s|%-6s|%-10s|%-5s|\n",
+                            "Flightid", "Origin", "Destination",
+                            "Date", "Time", "Price", "Seats");
+        } else {
+            System.out.println(flights.get(index).toString());
         }
-        else
-        {
-            Flight flight = flights.get(index);
-            System.out.format(format, flight.getFlightid(), flight.getOrigin(),
-                            flight.getDestination(), flight.getDate(),
-                            flight.getTime(), flight.getPrice(), flight.getSeats());
-            System.out.println("........................................."
-                            + "..........................................");
-        }
+        System.out.println("..................................."
+                            + "...................................");
     }
 
     public Flight read() throws IOException

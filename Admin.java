@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.io.IOException;
 
 public class Admin
 {
@@ -106,7 +107,7 @@ public class Admin
                 flight.setSeats(scanner.nextInt());
                 schedule.add(flight);
                 bValid = true;
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException | IOException e) {
                 System.out.println("Not a number!");
                 scanner.next();
             }
@@ -155,7 +156,7 @@ public class Admin
                 flight.setSeats(scanner.nextInt());
                 schedule.update(index, flight);
                 bValid = true;
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException | IOException e) {
                 System.out.println("Not a number!");
                 scanner.next();
             }

@@ -6,7 +6,8 @@ public class Flight
     private String date;
     private String time;
     private int price;
-    private int seat;
+    private int seats;
+    public Boolean deleted = false;
 
     public Flight()
     {
@@ -16,7 +17,7 @@ public class Flight
         this.date = "";
         this.time = "";
         this.price = 0;
-        this.seat = 0;
+        this.seats = 0;
     }
 
     public String toString()
@@ -28,7 +29,7 @@ public class Flight
         strInfo += date;
         strInfo += time;
         strInfo += Integer.toString(price);
-        strInfo += Integer.toString(seat);
+        strInfo += Integer.toString(seats);
         return strInfo;
     }
 
@@ -64,7 +65,7 @@ public class Flight
 
     public int getSeats()
     {
-        return this.seat;
+        return this.seats;
     }
 
     public void setFlightid(String flightid)
@@ -97,8 +98,8 @@ public class Flight
         this.price = price;
     }
 
-    public void setSeats(int seat)
+    public void setSeats(int seats)
     {
-        this.seat = seat;
+        this.seats = seats;
     }
 }

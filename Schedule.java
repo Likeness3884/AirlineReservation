@@ -13,16 +13,6 @@ public class Schedule
         this.size = 0;
     }
 
-    public ArrayList<Flight> getFlights()
-    {
-        return flights;
-    }
-
-    public void setFlights(ArrayList<Flight> flights)
-    {
-        this.flights = flights;
-    }
-
     public void add(Flight flight) throws IOException
     {
         flights.add(flight);
@@ -123,5 +113,15 @@ public class Schedule
             str += raf.readChar();
         }
         return str.trim();
+    }
+
+    public ArrayList<Flight> getFlights()
+    {
+        return flights;
+    }
+
+    public void setFlights(ArrayList<Flight> flights)
+    {
+        this.flights = flights;
     }
 }

@@ -24,22 +24,7 @@ public class Passenger
         this.schedule = schedule;
     }
 
-    public String getName()
-    {
-        return this.name;
-    }
-
-    public String getPass()
-    {
-        return this.pass;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    public void ShowMenu()
+    public void init()
     {
         Boolean flag = true;
         while (flag)
@@ -78,22 +63,22 @@ public class Passenger
             switch (choose)
             {
                 case 1:
-                    changePassword();
+                    password();
                     break;
                 case 2:
-                    searchFlightTickets();
+                    search();
                     break;
                 case 3:
-                    bookingTicket();
+                    booking();
                     break;
                 case 4:
-                    ticketCancellation();
+                    cancel();
                     break;
                 case 5:
-                    bookedTickets();
+                    tickets();
                     break;
                 case 6:
-                    addCharge();
+                    charge();
                     break;
                 case 0:
                     flag = false;
@@ -104,14 +89,14 @@ public class Passenger
         }
     }
 
-    private void changePassword()
+    private void password()
     {
         System.out.print("Enter new password: ");
         this.pass = scanner.next();
         System.out.println();
     }
 
-    private void searchFlightTickets()
+    private void search()
     {
         System.out.print("Enter Flightid: ");
         String inFlightid = scanner.next();
@@ -137,7 +122,7 @@ public class Passenger
         schedule.print(index);
     }
 
-    private void bookingTicket()
+    private void booking()
     {
         System.out.print("Enter Flightid: ");
         String inFlightid = scanner.next();
@@ -182,7 +167,7 @@ public class Passenger
         }
     }
 
-    private void ticketCancellation()
+    private void cancel()
     {
         System.out.print("Enter Ticketid: ");
         int inTicketid= scanner.nextInt();
@@ -215,7 +200,7 @@ public class Passenger
         charge += price;
     }
 
-    private void bookedTickets()
+    private void tickets()
     {
         for (int i = 0; i < tickets.size(); i++)
         {
@@ -226,7 +211,7 @@ public class Passenger
         }
     }
 
-    private void addCharge()
+    private void charge()
     {
         Boolean bValid = false;
         while (!bValid)
@@ -241,5 +226,20 @@ public class Passenger
                 scanner.next();
             }
         }
+    }
+
+    public String getName()
+    {
+        return this.name;
+    }
+
+    public String getPass()
+    {
+        return this.pass;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
     }
 }

@@ -19,7 +19,7 @@ public class Login
         this.schedule = schedule;
     }
 
-    public void ShowMenu()
+    public void init()
     {
         Boolean flag = true;
         while (flag) {
@@ -103,7 +103,7 @@ public class Login
 
         if (bAdmin)
         {
-            if (inPass.equals(admin.getPass())) admin.ShowMenu();
+            if (inPass.equals(admin.getPass())) admin.init();
             else System.out.println("Password is wrong!");
             return;
         }
@@ -111,7 +111,7 @@ public class Login
         {
             if (inPass.equals(passengers.get(index).getPass()))
             {
-                passengers.get(index).ShowMenu();
+                passengers.get(index).init();
             }
             else System.out.println("Password is wrong!");
         }

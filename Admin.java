@@ -18,17 +18,7 @@ public class Admin
         this.schedule = schedule;
     }
 
-    public String getName()
-    {
-        return this.name;
-    }
-
-    public String getPass()
-    {
-        return this.pass;
-    }
-
-    public void ShowMenu()
+    public void init()
     {
         Boolean flag = true;
         while (flag)
@@ -73,7 +63,7 @@ public class Admin
                     remove();
                     break;
                 case 4:
-                    flightSchedules();
+                    schedule();
                     break;
                 case 0:
                     flag = false;
@@ -188,11 +178,21 @@ public class Admin
         schedule.delete(index);
     }
 
-    private void flightSchedules()
+    private void schedule()
     {
         for (int i = -1; i < schedule.size; i++)
         {
             schedule.print(i);
         }
+    }
+
+    public String getName()
+    {
+        return this.name;
+    }
+
+    public String getPass()
+    {
+        return this.pass;
     }
 }

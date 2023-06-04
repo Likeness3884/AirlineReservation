@@ -18,7 +18,7 @@ public class Admin
         this.schedule = schedule;
     }
 
-    public void init()
+    public void init() throws IOException
     {
         Boolean flag = true;
         while (flag)
@@ -153,7 +153,7 @@ public class Admin
         }
     }
 
-    private void remove()
+    private void remove() throws IOException
     {
         System.out.print("Enter Flightid: ");
         String inFlightid = scanner.next();

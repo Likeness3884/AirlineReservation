@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.io.IOException;
 
 public class Login
 {
@@ -101,19 +102,23 @@ public class Login
         System.out.print("Enter Password: ");
         String inPass = scanner.next();
 
-        if (bAdmin)
-        {
-            if (inPass.equals(admin.getPass())) admin.init();
-            else System.out.println("Password is wrong!");
-            return;
-        }
-        else
-        {
-            if (inPass.equals(passengers.get(index).getPass()))
+        try {
+            if (bAdmin)
             {
-                passengers.get(index).init();
+                if (inPass.equals(admin.getPass())) admin.init();
+                else System.out.println("Password is wrong!");
+                return;
             }
-            else System.out.println("Password is wrong!");
+            else
+            {
+                if (inPass.equals(passengers.get(index).getPass()))
+                {
+                    passengers.get(index).init();
+                }
+                else System.out.println("Password is wrong!");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -7,7 +7,7 @@ public class Flight
     private String time;
     private int price;
     private int seats;
-    public Boolean deleted = false;
+    public Boolean deleted;
 
     public Flight()
     {
@@ -18,6 +18,7 @@ public class Flight
         this.time = "";
         this.price = 0;
         this.seats = 0;
+        this.deleted = false;
     }
 
     public String toString()

@@ -5,19 +5,15 @@ import java.io.IOException;
 public class Schedule
 {
     private ArrayList<Flight> flights = new ArrayList<>();
-    public int size;
+    public int size = 0;
     private RandomAccessFile raf;
-
-    public Schedule()
-    {
-        this.size = 0;
-    }
 
     public void add(Flight flight) throws IOException
     {
         flights.add(flight);
-        this.size++;
+        size++;
         raf = new RandomAccessFile("schedule.dat", "rw");
+        raf.seek(raf.length());
         raf.writeChars(flight.getFlightid());
         raf.writeChars(fixString(flight.getOrigin(), 9));
         raf.writeChars(fixString(flight.getDestination(), 12));
@@ -25,6 +21,7 @@ public class Schedule
         raf.writeChars(flight.getTime());
         raf.writeInt(flight.getPrice());
         raf.writeInt(flight.getSeats());
+        raf.writeBoolean(flight.deleted);
         raf.close();
     }
 
@@ -32,7 +29,7 @@ public class Schedule
     {
         flights.set(index, flight);
         raf = new RandomAccessFile("schedule.dat", "rw");
-        raf.seek(index * 49);
+        raf.seek(index * 50);
         raf.writeChars(flight.getFlightid());
         raf.writeChars(fixString(flight.getOrigin(), 9));
         raf.writeChars(fixString(flight.getDestination(), 12));
@@ -40,14 +37,16 @@ public class Schedule
         raf.writeChars(flight.getTime());
         raf.writeInt(flight.getPrice());
         raf.writeInt(flight.getSeats());
+        raf.writeBoolean(flight.deleted);
         raf.close();
     }
 
-    public void delete(int index)
+    public void delete(int index) throws IOException
     {
-        flights.remove(index);
         flights.get(index).deleted = true;
-        this.size--;
+        update(index, flights.get(index));
+        flights.remove(index);
+        size--;
     }
 
     public void print(int index)
@@ -63,9 +62,10 @@ public class Schedule
                             + "...................................");
     }
 
-    public Flight read() throws IOException
+    public Flight read(int index) throws IOException
     {
         raf = new RandomAccessFile("schedule.dat", "r");
+        raf.seek(index * 50);
         String flightid = fixRead(5);
         String origin = fixRead(9);
         String destination = fixRead(12);
@@ -73,6 +73,7 @@ public class Schedule
         String time = fixRead(5);
         int price = raf.readInt();
         int seats = raf.readInt();
+        Boolean deleted = raf.readBoolean();
         Flight flight = new Flight();
         flight.setFlightid(flightid);
         flight.setOrigin(origin);
@@ -81,6 +82,7 @@ public class Schedule
         flight.setTime(time);
         flight.setPrice(price);
         flight.setSeats(seats);
+        flight.deleted = deleted;
         raf.close();
         return flight;
     }
